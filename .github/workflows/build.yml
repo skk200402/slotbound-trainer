@@ -34,8 +34,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.pkg.outputs.name }}
-          path: dist/slotbound_trainer.exe
-          if-no-files-found: error
+          path: |
+            dist/slotbound_trainer.exe
+            build/Release/*.dll
+            build/Release/*.exe
+          if-no-files-found: warn
 
       - name: Publish release
         if: github.ref_type == 'tag'
